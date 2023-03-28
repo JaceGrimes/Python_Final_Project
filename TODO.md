@@ -5,6 +5,8 @@
 * [ ] Add a basic slur word filter
 * [ ] Add a lock command that will let administrators temporary lock a channel, useful in case of a raid
 * [ ] Add an archive command that lets administrators archive a text channel in a text file
+* [ ] Add Music search and Play functionality
+* [ ] Add Link to iSTAR Dev site to link with CTF Updates
 
 ## Done
 
