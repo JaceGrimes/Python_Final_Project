@@ -1,10 +1,3 @@
-""""
-Copyright © Krypton 2019-2023 - https://github.com/kkrypt0nn (https://krypton.ninja)
-Description:
-🐍 A simple template to start to code your own and personalized discord bot in Python programming language.
-
-Version: 5.5.0
-"""
 
 import discord
 from discord import app_commands
@@ -22,6 +15,7 @@ class Moderation(commands.Cog, name="moderation"):
         name="kick",
         description="Kick a user out of the server.",
     )
+    @app_commands.guilds(discord.Object(id=1068224199799345243))
     @commands.has_permissions(kick_members=True)
     @commands.bot_has_permissions(kick_members=True)
     @checks.not_blacklisted()

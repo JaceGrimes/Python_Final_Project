@@ -68,7 +68,7 @@ It is recommended to use slash commands and therefore not use prefix commands.
 
 If you want to use prefix commands, make sure to also enable the intent below in the Discord developer portal.
 """
-# intents.message_content = True
+intents.message_content = True
 
 bot = Bot(
     command_prefix=commands.when_mentioned_or(config["prefix"]),
@@ -117,7 +117,8 @@ logger.setLevel(logging.INFO)
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(LoggingFormatter())
 # File handler
-file_handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
+file_handler = logging.FileHandler(
+    filename="discord.log", encoding="utf-8", mode="w")
 file_handler_formatter = logging.Formatter(
     "[{asctime}] [{levelname:<8}] {name}: {message}", "%Y-%m-%d %H:%M:%S", style="{"
 )
@@ -158,7 +159,8 @@ async def on_ready() -> None:
     bot.logger.info(f"Logged in as {bot.user.name}")
     bot.logger.info(f"discord.py API version: {discord.__version__}")
     bot.logger.info(f"Python version: {platform.python_version()}")
-    bot.logger.info(f"Running on: {platform.system()} {platform.release()} ({os.name})")
+    bot.logger.info(
+        f"Running on: {platform.system()} {platform.release()} ({os.name})")
     bot.logger.info("-------------------")
     status_task.start()
     if config["sync_commands_globally"]:
@@ -171,7 +173,7 @@ async def status_task() -> None:
     """
     Setup the game status task of the bot.
     """
-    statuses = ["with you!", "with Krypton!", "with humans!"]
+    statuses = ["with you!", "with Solemn!", "with humans!"]
     await bot.change_presence(activity=discord.Game(random.choice(statuses)))
 
 
@@ -297,7 +299,8 @@ async def load_cogs() -> None:
                 bot.logger.info(f"Loaded extension '{extension}'")
             except Exception as e:
                 exception = f"{type(e).__name__}: {e}"
-                bot.logger.error(f"Failed to load extension {extension}\n{exception}")
+                bot.logger.error(
+                    f"Failed to load extension {extension}\n{exception}")
 
 
 asyncio.run(init_db())

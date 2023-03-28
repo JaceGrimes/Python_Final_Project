@@ -25,6 +25,7 @@ class General(commands.Cog, name="general"):
     @commands.hybrid_command(
         name="help", description="List all commands the bot has loaded."
     )
+    @app_commands.guilds(discord.Object(id=1068224199799345243))
     @checks.not_blacklisted()
     async def help(self, context: Context) -> None:
         prefix = self.bot.config["prefix"]
@@ -56,11 +57,11 @@ class General(commands.Cog, name="general"):
         :param context: The hybrid command context.
         """
         embed = discord.Embed(
-            description="Used [Krypton's](https://krypton.ninja) template",
+            description="A bot for me",
             color=0x9C84EF,
         )
         embed.set_author(name="Bot Information")
-        embed.add_field(name="Owner:", value="Krypton#7331", inline=True)
+        embed.add_field(name="Owner:", value="Solemn#0676", inline=True)
         embed.add_field(
             name="Python Version:", value=f"{platform.python_version()}", inline=True
         )
@@ -99,7 +100,8 @@ class General(commands.Cog, name="general"):
         embed.add_field(
             name="Text/Voice Channels", value=f"{len(context.guild.channels)}"
         )
-        embed.add_field(name=f"Roles ({len(context.guild.roles)})", value=roles)
+        embed.add_field(
+            name=f"Roles ({len(context.guild.roles)})", value=roles)
         embed.set_footer(text=f"Created at: {context.guild.created_at}")
         await context.send(embed=embed)
 
@@ -143,26 +145,26 @@ class General(commands.Cog, name="general"):
         except discord.Forbidden:
             await context.send(embed=embed)
 
-    @commands.hybrid_command(
-        name="server",
-        description="Get the invite link of the discord server of the bot for some support.",
-    )
-    @checks.not_blacklisted()
-    async def server(self, context: Context) -> None:
-        """
-        Get the invite link of the discord server of the bot for some support.
+    # @commands.hybrid_command(
+    #     name="server",
+    #     description="Get the invite link of the discord server of the bot for some support.",
+    # )
+    # @checks.not_blacklisted()
+    # async def server(self, context: Context) -> None:
+    #     """
+    #     Get the invite link of the discord server of the bot for some support.
 
-        :param context: The hybrid command context.
-        """
-        embed = discord.Embed(
-            description=f"Join the support server for the bot by clicking [here](https://discord.gg/mTBrXyWxAF).",
-            color=0xD75BF4,
-        )
-        try:
-            await context.author.send(embed=embed)
-            await context.send("I sent you a private message!")
-        except discord.Forbidden:
-            await context.send(embed=embed)
+    #     :param context: The hybrid command context.
+    #     """
+    #     embed = discord.Embed(
+    #         description=f"Join the support server for the bot by clicking [here](https://discord.gg/mTBrXyWxAF).",
+    #         color=0xD75BF4,
+    #     )
+    #     try:
+    #         await context.author.send(embed=embed)
+    #         await context.send("I sent you a private message!")
+    #     except discord.Forbidden:
+    #         await context.send(embed=embed)
 
     @commands.hybrid_command(
         name="8ball",
