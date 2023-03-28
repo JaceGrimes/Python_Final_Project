@@ -98,6 +98,29 @@ class RockPaperScissorsView(discord.ui.View):
         super().__init__()
         self.add_item(RockPaperScissors())
 
+# class SlotsView(discord.ui.View):
+#     def __init__(self):
+#         super().__init__()
+#         self.add_item(Slots())
+# class Slots(discord.ui.Button):
+#     def __init__(self):
+#         super().__init__(label="Spin", style=discord.ButtonStyle.green)
+#     async def callback(self, interaction: discord.Interaction):
+#         await interaction.response.defer()
+#         slots = ["🍇", "🍊", "🍐", "🍒", "🍋", "🍉"]
+#         slot1 = random.choice(slots)
+#         slot2 = random.choice(slots)
+#         slot3 = random.choice(slots)
+#         if slot1 == slot2 == slot3:
+#             await interaction.edit_original_message(
+#                 content=f"{slot1} | {slot2} | {slot3}\nYou won!"
+#             )
+#         else:
+#             await interaction.edit_original_message(
+#                 content=f"{slot1} | {slot2} | {slot3}\nYou lost!"
+#             )
+
+
 
 class Fun(commands.Cog, name="fun"):
     def __init__(self, bot):
@@ -118,7 +141,8 @@ class Fun(commands.Cog, name="fun"):
             ) as request:
                 if request.status == 200:
                     data = await request.json()
-                    embed = discord.Embed(description=data["text"], color=0xD75BF4)
+                    embed = discord.Embed(
+                        description=data["text"], color=0xD75BF4)
                 else:
                     embed = discord.Embed(
                         title="Error!",
@@ -166,6 +190,19 @@ class Fun(commands.Cog, name="fun"):
         """
         view = RockPaperScissorsView()
         await context.send("Please make your choice", view=view)
+
+    # this is the slots game
+    # @commands.hybrid.command(name="slots", description="Play the slots game.")
+    # @checks.not_blacklisted()
+    # async def slots(self, context: Context) -> None:
+    #     """
+    #     Play the slots game.
+
+    #     :param context: The hybrid command context.
+    #     """
+
+    #     view = SlotsView()
+    #     await context.send("Please spin the slots", view=view)
 
 
 async def setup(bot):
