@@ -4,7 +4,9 @@
   "permissions": "YOUR_BOT_PERMISSIONS_HERE",
   "application_id": "1068224542184591423",
   "sync_commands_globally": false,
+  "API_KEY": "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",
   "owners": [
     625851765451128867
   ]
+  
 }
