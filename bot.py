@@ -78,9 +78,9 @@ bot = Bot(
 
 # Setup both of the loggers
 
-
+# Setup the logger for the bot
 class LoggingFormatter(logging.Formatter):
-    # Colors
+    # Colors for the log levels (DEBUG, INFO, WARNING, ERROR, CRITICAL) and the reset color 
     black = "\x1b[30m"
     red = "\x1b[31m"
     green = "\x1b[32m"
@@ -91,6 +91,7 @@ class LoggingFormatter(logging.Formatter):
     reset = "\x1b[0m"
     bold = "\x1b[1m"
 
+    # Colors for the log levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     COLORS = {
         logging.DEBUG: gray + bold,
         logging.INFO: blue + bold,
@@ -109,7 +110,7 @@ class LoggingFormatter(logging.Formatter):
         formatter = logging.Formatter(format, "%Y-%m-%d %H:%M:%S", style="{")
         return formatter.format(record)
 
-
+# Setup the logger for the cogs 
 logger = logging.getLogger("discord_bot")
 logger.setLevel(logging.INFO)
 
@@ -129,7 +130,7 @@ logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 bot.logger = logger
 
-
+# aiohttp session for the bot
 async def init_db():
     async with aiosqlite.connect(
         f"{os.path.realpath(os.path.dirname(__file__))}/database/database.db"
@@ -148,9 +149,10 @@ The config is available using the following code:
 - bot.config # In this file
 - self.bot.config # In cogs
 """
+# Create a bot variable to access the config file in cogs so that you don't need to import it every time
 bot.config = config
 
-
+# Create a bot variable to access the database in cogs so that you don't need to import it every time
 @bot.event
 async def on_ready() -> None:
     """
@@ -169,6 +171,7 @@ async def on_ready() -> None:
 
 
 @tasks.loop(minutes=1.0)
+# noinspection PyBroadException 
 async def status_task() -> None:
     """
     Setup the game status task of the bot.
