@@ -26,7 +26,7 @@ class OpenAI(commands.Cog, name="openai"):
 # This will only allow non-blacklisted members to execute the command
     @checks.not_blacklisted()
     # This will only allow owners of the bot to execute the command -> config.json
-    @checks.is_owner()
+    # @checks.is_owner()
     async def askGPT(self, context: Context, *args: str):
         """
         This is a testing command connects with ChatGPT.
@@ -34,6 +34,10 @@ class OpenAI(commands.Cog, name="openai"):
         :param context: The application command context.
         """
         prompt = " ".join(args)
+
+        if prompt == "":
+            await context.send("Please provide a question.")
+            return
         # Do your stuff here
         async with aiohttp.ClientSession() as session:
             payload = {
@@ -57,22 +61,15 @@ class OpenAI(commands.Cog, name="openai"):
             ) as response:
                 response = await response.json()
                 embed = discord.Embed(
-                    title="GPT-3 AI",
+                    title="SHAT GPT",
                     description=f"```{response['choices'][0]['text']}```",
                     color=0x00ff00,
                 )
                 await context.reply(embed=embed)
-
-    # @askGPT.error
-    # async def askGPT_error(self, context, error):
-    #     if isinstance(error, commands.MissingRequiredArgument):
-    #         await context.reply("Please provide a prompt to ask GPT-3.")
-    #     else:
-    #         raise error
-
-        # Don't forget to remove "pass", I added this just because there's no content in the method.
+# if user did not provide a prompt then dont run the command and send a message to the user
 
 
 # And then we finally add the cog to the bot so that it can load, unload, reload and use it's content.
 async def setup(bot):
     await bot.add_cog(OpenAI(bot))
+
